@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
+import { RouterAppModule} from "./routermodule/routermodule.module";
+
 
 @NgModule({
   declarations: [
@@ -12,7 +14,8 @@ import { HomeComponent } from './home/home.component';
     HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterAppModule
   ],
   providers: [],
   bootstrap: [AppComponent]
