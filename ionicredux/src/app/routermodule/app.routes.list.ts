@@ -1,8 +1,8 @@
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './../home/home.component';
 const appRoutesList: Routes = [
-    // { path: 'crisis-center', component: CrisisListComponent },
-    // { path: 'heroes', component: HeroListComponent },
-    // { path: '', redirectTo: '/heroes', pathMatch: 'full' },
-    // { path: '**', component: PageNotFoundComponent }
+     { path: 'home', component: HomeComponent },
+     { path: '', component: HomeComponent },
+     { path: '**', component: HomeComponent }
 ];
 export default appRoutesList;
