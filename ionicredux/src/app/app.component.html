@@ -1,10 +1,26 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <a href="https://www.pluralsight.com/guides/front-end-javascript/building-a-redux-application-with-angular-2-part-1">Link</a>
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <button >Increament</button>
-  <button >Decreament</button>
-</div>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>Counter</h3>
+        <p>Custom Store</p>
 
+        <p>
+          The counter value is:
+          <b>{{ counter }}</b>
+        </p>
+
+        <p>
+          <button (click)="increment()"
+                  class="btn btn-primary">
+            Increment
+          </button>
+          <button (click)="decrement()"
+                  class="btn btn-default">
+             Decrement
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
