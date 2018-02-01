@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  //http://blog.ng-book.com/introduction-to-redux-with-typescript-and-angular-2/
 }
