@@ -8,8 +8,8 @@ import {
 
 import { AppState } from './app.state';
 import {
-  counterReducer as reducer
-} from './counter.reducer';
+  rootReducer as reducer
+} from './app.reducer';
 
 export const AppStore = new InjectionToken('App.store');
 

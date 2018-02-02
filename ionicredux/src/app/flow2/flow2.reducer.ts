@@ -2,17 +2,17 @@
  * Counter Reducer
  */
 import { Reducer, Action } from 'redux';
-import { AppState } from './app.state';
+import { Flow2State } from './flow2.state';
 import {
   INCREMENT,
   DECREMENT
-} from './counter.actions';
+} from './flow2.actions';
 
-const initialState: AppState = { counter: 0 };
+export const initialState: Flow2State = { counter: 0 };
 
 // Create our reducer that will handle changes to the state
-export const counterReducer: Reducer<AppState> =
-  (state: AppState = initialState, action: Action): AppState => {
+export const flow2Reducer: Reducer<Flow2State> =
+  (state: Flow2State = initialState, action: Action): Flow2State => {
     switch (action.type) {
     case INCREMENT:
       return Object.assign({}, state, { counter: state.counter + 1 });

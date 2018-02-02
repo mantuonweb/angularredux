@@ -1,3 +1,5 @@
+import { Flow1State } from './flow1/flow1.state';
+import { Flow2State } from './flow2/flow2.state';
 /*
  * minimal counter app state
  * 
@@ -7,6 +9,7 @@
  */
 
 export interface AppState {
-  counter: number;
-};
+  flow1: Flow1State;
+  flow2: Flow1State;
+}
 
