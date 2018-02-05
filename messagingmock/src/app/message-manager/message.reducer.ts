@@ -6,16 +6,18 @@ import { MessageState } from './message.state';
 import {
   SEND,
   SENDING,
-  RECIEVED
+  RECIEVED,
+  AddMessageAction
 } from './message.actions';
 
 import { createSelector } from 'reselect';
 
 export const messageState: MessageState = { 
-    type:"string",
+    type:"",
     time:new Date(),
-    user:"string",
-    action:"string" 
+    text:"",
+    user:"",
+    action:"" 
 };
 
 // Create our reducer that will handle changes to the state
@@ -23,11 +25,12 @@ export const messageReducer: Reducer<MessageState> =
   (state: MessageState, action: Action): MessageState => {
     switch (action.type) {
     case SEND:
-      return Object.assign({}, state);
+      let msg = (<AddMessageAction>action).message;
+      return Object.assign({}, state,msg);
     case RECIEVED:
       return Object.assign({}, state);
     default:
-      return state;
+      return state||messageState;
     }
 };
 export const getMessageState = (state): MessageState => state;
