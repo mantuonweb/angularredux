@@ -3,12 +3,12 @@ import {
   ActionCreator
 } from 'redux';
 
-export const INCREMENT: string = 'INCREMENT';
+export const INC: string = 'INC';
 export const increment: ActionCreator<Action> = () => ({
-  type: INCREMENT
+  type: INC
 });
 
-export const DECREMENT: string = 'DECREMENT';
+export const DEC: string = 'DEC';
 export const decrement: ActionCreator<Action> = () => ({
-  type: DECREMENT
+  type: DEC
 });

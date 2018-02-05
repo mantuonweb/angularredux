@@ -8,11 +8,13 @@ import {
   DECREMENT
 } from './flow2.actions';
 
-export const initialState: Flow2State = { counter: 0 };
+import { createSelector } from 'reselect';
+
+export const initialStateFlow2: Flow2State = { counter: 0 };
 
 // Create our reducer that will handle changes to the state
 export const flow2Reducer: Reducer<Flow2State> =
-  (state: Flow2State = initialState, action: Action): Flow2State => {
+  (state: Flow2State = initialStateFlow2, action: Action): Flow2State => {
     switch (action.type) {
     case INCREMENT:
       return Object.assign({}, state, { counter: state.counter + 1 });
@@ -21,4 +23,7 @@ export const flow2Reducer: Reducer<Flow2State> =
     default:
       return state;
     }
-  };
+};
+export const getFlow2State = (state): Flow2State => state.flow2;
+
+export const getCurrentFlow2 = createSelector(getFlow2State,( state: Flow2State ) => state.counter );

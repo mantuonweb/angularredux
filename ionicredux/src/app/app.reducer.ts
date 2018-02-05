@@ -9,6 +9,10 @@ import {flow2Reducer} from "./flow2/flow2.reducer"
 import { Flow1State } from './flow1/flow1.state';
 import { Flow2State } from './flow2/flow2.state';
 
+//export all the feids from the reducers
+
+export * from './flow1/flow1.reducer';
+export * from './flow2/flow2.reducer';
 //merging the states
 export interface AppState {
     flow1: Flow1State;
