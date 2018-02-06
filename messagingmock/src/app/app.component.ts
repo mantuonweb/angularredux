@@ -2,11 +2,12 @@ import { Component, Inject } from '@angular/core';
 import { Store } from 'redux';
 import { AppStore } from './app.store';
 import { AppState } from './app.state';
+import { MessageState } from './chat-manager/chat.state'
 
-import * as MessageAction from './message-manager/message.actions';
 import * as ChatAction from './chat-manager/chat.actions';
+import * as UserAction from './user-manager/chat.actions';
 import {
-  getCurrentMessageManager,getCurrentChatManager
+  getCurrentChatManager,getCurrentUserManager,getCurrentChatMessages
 } from './app.reducer';
 
 @Component({
@@ -17,40 +18,58 @@ import {
 export class AppComponent {
   title = 'app';
   message="";
-  messageState:any;
   chatState:any;
+  userState:any;
   state:AppState;
   messages:any[]=[];
   user:string;
+  messageObj:MessageState;
   constructor(@Inject(AppStore) private store: Store<AppState>) {
     store.subscribe(() => this.messageEvent());
     this.init();
   }
   messageEvent(){
     console.log(arguments);
-    if(this.state.type=="message"){
-      this.messages.push(Object.assign({},this.messageState));
-    }
-
+    this.state = this.store.getState();
+    this.chatState = getCurrentChatManager(this.state);
+    this.userState = getCurrentUserManager(this.state);
+    this.updateUser(this.userState);
+    this.updateMessage(this.chatState);
+    console.log(getCurrentChatMessages(this.state));
+  }
+  updateUser(userState:any){
+    console.log(userState,"user")
+  }
+  updateMessage(messageState:any){
+    console.log(messageState,"message")
   }
   init(){
     this.state = this.store.getState();
-    this.messageState = getCurrentMessageManager(this.state);
+    this.userState = getCurrentUserManager(this.state);
     this.chatState = getCurrentChatManager(this.state);
-
   }
   sendMessage(){
-    this.state = this.store.getState();
-    this.state.type = "message";
-    this.messageState.text=this.message;
-    this.store.dispatch(MessageAction.send(this.messageState));
-    this.message="";
+    if(this.message && this.userState.user){
+      this.state = this.store.getState();
+      this.messageObj= { 
+          type:"",
+          time:new Date(),
+          text:"",
+          user:"",
+          action:"" 
+      };
+      this.messageObj.text=this.message;
+      this.messageObj.action = "IN";
+      this.messageObj.type = "SEND";
+      this.messageObj.user=this.userState.user;
+      this.store.dispatch(ChatAction.send(this.chatState,this.messageObj));
+      this.message="";
+    }
   }
   addUser(){
-    this.chatState.user=this.user;
+    this.userState.user=this.user;
     const state = this.store.getState();
-    state.type = "chat";
-    this.store.dispatch(ChatAction.joined(this.chatState));
+    this.store.dispatch(UserAction.joined(this.userState));
     this.user="";
   }
 }

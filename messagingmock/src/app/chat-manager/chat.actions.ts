@@ -1,18 +1,28 @@
 import {
     Action,
     ActionCreator
-} from 'redux';
-import { ChatState } from './chat.state';
-export const JOINED: string = 'JOINED';
-export const LEFT: string = 'LEFT';
+  } from 'redux';
+  import { MessageState,Chat } from './chat.state';
+  export const SEND: string = 'SEND';
+  export const SENDING: string = 'SENDING';
+  export const RECIEVED: string = 'RECIEVED';
+  export const STARTED: string = 'STARTED';
+  export interface AddChatAction extends Action {
+    message: MessageState;
+    chat:Chat
+  }
+  export const send: ActionCreator<AddChatAction> = (chat:Chat,message:MessageState):AddChatAction => ({
+    type: SEND,
+    message:message,
+    chat:chat
+  });
+  export const sending: ActionCreator<Action> = () => ({
+    type: SENDING
+  });
+  export const recieved: ActionCreator<Action> = (message:MessageState) => ({
+    type: RECIEVED
+  });
+  export const started: ActionCreator<Action> = (message:MessageState) => ({
+    type: STARTED
+  });
 
-export interface ChatThreadAction extends Action {
-chat: ChatState;
-}
-export const joined: ActionCreator<ChatThreadAction> = (chat:ChatState):ChatThreadAction => ({
-type: JOINED,
-chat:chat
-});
-export const left: ActionCreator<Action> = () => ({
-type: LEFT
-});

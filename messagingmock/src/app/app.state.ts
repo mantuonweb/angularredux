@@ -1,5 +1,5 @@
 import { MessageState } from './message-manager/message.state';
-import { ChatState } from './chat-manager/chat.state';
+import { UserState } from './user-manager/chat.state';
 // import { Flow2State } from './flow2/flow2.state';
 /*
  * minimal counter app state
@@ -11,5 +11,5 @@ import { ChatState } from './chat-manager/chat.state';
 
 export interface AppState {
   message?: MessageState;
-  chat?:ChatState;
+  user?:UserState;
 }
