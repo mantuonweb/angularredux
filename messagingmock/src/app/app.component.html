@@ -1,8 +1,7 @@
-Chatapp
-
-<input [(ngModel)]="message">
+<input [(ngModel)]="message" placeholder="Message">
 <button (click)="sendMessage()">Send</button>
-
+<input [(ngModel)]="user" placeholder="User">
+<button (click)="addUser()">Add</button>
 <ul>
     <li *ngFor="let message of messages">
         {{message.text}}

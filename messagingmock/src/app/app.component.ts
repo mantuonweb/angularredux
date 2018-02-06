@@ -4,8 +4,9 @@ import { AppStore } from './app.store';
 import { AppState } from './app.state';
 
 import * as MessageAction from './message-manager/message.actions';
+import * as ChatAction from './chat-manager/chat.actions';
 import {
-  getCurrentMessageManager
+  getCurrentMessageManager,getCurrentChatManager
 } from './app.reducer';
 
 @Component({
@@ -17,21 +18,39 @@ export class AppComponent {
   title = 'app';
   message="";
   messageState:any;
+  chatState:any;
+  state:AppState;
   messages:any[]=[];
+  user:string;
   constructor(@Inject(AppStore) private store: Store<AppState>) {
     store.subscribe(() => this.messageEvent());
     this.init();
   }
   messageEvent(){
-    this.messages.push(Object.assign({},this.messageState.message));
+    console.log(arguments);
+    if(this.state.type=="message"){
+      this.messages.push(Object.assign({},this.messageState));
+    }
+
   }
   init(){
-    const state = this.store.getState();
-    this.messageState = getCurrentMessageManager(state);
+    this.state = this.store.getState();
+    this.messageState = getCurrentMessageManager(this.state);
+    this.chatState = getCurrentChatManager(this.state);
+
   }
   sendMessage(){
-    this.messageState.message.text=this.message;
+    this.state = this.store.getState();
+    this.state.type = "message";
+    this.messageState.text=this.message;
     this.store.dispatch(MessageAction.send(this.messageState));
     this.message="";
+  }
+  addUser(){
+    this.chatState.user=this.user;
+    const state = this.store.getState();
+    state.type = "chat";
+    this.store.dispatch(ChatAction.joined(this.chatState));
+    this.user="";
   }
 }

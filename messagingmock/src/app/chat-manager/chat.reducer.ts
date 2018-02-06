@@ -11,7 +11,7 @@ import {
 
 import { createSelector } from 'reselect';
 
-export const messageState: ChatState = { 
+export const chatState: ChatState = { 
     type:"",
     time:new Date(),
     messages:[],
@@ -20,7 +20,7 @@ export const messageState: ChatState = {
 };
 
 // Create our reducer that will handle changes to the state
-export const messageReducer: Reducer<ChatState> =
+export const chatReducer: Reducer<ChatState> =
   (state: ChatState, action: Action): ChatState => {
     switch (action.type) {
     case JOINED:
@@ -29,9 +29,9 @@ export const messageReducer: Reducer<ChatState> =
     case LEFT:
       return Object.assign({}, state);
     default:
-      return state||messageState;
+      return state||chatState;
     }
 };
-export const getMessageState = (state): ChatState => state;
+export const getChatState = (state): ChatState => state.chat;
 
-export const getCurrentMessageManager = createSelector(getMessageState,( state: MessageState ) => state );
+export const getCurrentChatManager = createSelector(getChatState,( state: ChatState ) => state );

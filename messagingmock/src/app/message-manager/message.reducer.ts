@@ -33,6 +33,6 @@ export const messageReducer: Reducer<MessageState> =
       return state||messageState;
     }
 };
-export const getMessageState = (state): MessageState => state;
+export const getMessageState = (state): MessageState => state.message;
 
 export const getCurrentMessageManager = createSelector(getMessageState,( state: MessageState ) => state );
