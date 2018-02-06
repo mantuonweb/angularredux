@@ -14,24 +14,22 @@ import {
 import { createSelector } from 'reselect';
 
 export const chatState: ChatState = { 
-    chats:[]
+    chats:{}
 };
 
 function addChat(message:MessageState,chatstate:ChatState){
-  let item = chatstate.chats.find(item=>{
-    return item.user==message.user;
-  });
-  if(!item){
+  
+  if(!chatstate.chats.hasOwnProperty(message.user)){
       let chat:Chat={
         chatid:1,
         type:"string",
         user:message.user,
         Messages:[message]
     };
-    chatstate.chats.push(chat);
+    chatstate.chats[message.user]=chat;
   }
   else{
-    item.Messages.push(message);
+    chatstate.chats[message.user].Messages.push(message);
   }
   return chatstate
 }
@@ -59,10 +57,8 @@ export const getCurrentChatManager = createSelector(getChatState,( state: ChatSt
 export const getMessageAll = (state): any => {
    let user = state.user;
    let chat = state.chat;
-   let item = chat.chats.find(item=>{
-    return item.user==user.user;
-  });
-  return item && item.Messages;
+   console.log("inside function",chat)
+   return chat.chats[user.user] && chat.chats[user.user].Messages;
 };
 
-export const getCurrentChatMessages = createSelector(getMessageAll,( state: ChatState ) => state );
+export const getCurrentChatMessages = createSelector(getMessageAll,( state: any ) => state );

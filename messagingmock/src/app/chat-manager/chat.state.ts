@@ -13,5 +13,5 @@ export interface Chat {
     Messages:any[]
 };
 export interface ChatState {
-   chats:Chat[]
+   chats:{}
 };

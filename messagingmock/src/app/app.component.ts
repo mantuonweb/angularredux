@@ -7,7 +7,7 @@ import { MessageState } from './chat-manager/chat.state'
 import * as ChatAction from './chat-manager/chat.actions';
 import * as UserAction from './user-manager/chat.actions';
 import {
-  getCurrentChatManager,getCurrentUserManager,getCurrentChatMessages
+  getCurrentChatManager,getCurrentUserManager,getCurrentChatMessages,getMessageAll
 } from './app.reducer';
 
 @Component({
@@ -35,7 +35,7 @@ export class AppComponent {
     this.userState = getCurrentUserManager(this.state);
     this.updateUser(this.userState);
     this.updateMessage(this.chatState);
-    console.log(getCurrentChatMessages(this.state));
+    this.messages=getMessageAll(this.state);
   }
   updateUser(userState:any){
     console.log(userState,"user")
