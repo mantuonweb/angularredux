@@ -21,8 +21,9 @@ export class AppComponent {
   chatState:any;
   userState:any;
   state:AppState;
-  messages:any[]=[];
+  messages:any[] = [];
   user:string;
+  userlist:any[] = [];
   messageObj:MessageState;
   constructor(@Inject(AppStore) private store: Store<AppState>) {
     store.subscribe(() => this.messageEvent());
@@ -66,8 +67,13 @@ export class AppComponent {
       this.message="";
     }
   }
+  selectUser(user:string){
+    this.userState.user=user;
+    this.store.dispatch(UserAction.joined(this.userState));
+  }
   addUser(){
     this.userState.user=this.user;
+    this.userlist.push(this.user);
     const state = this.store.getState();
     this.store.dispatch(UserAction.joined(this.userState));
     this.user="";

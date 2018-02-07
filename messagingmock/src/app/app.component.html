@@ -2,6 +2,11 @@
 <button (click)="sendMessage()">Send</button>
 <input [(ngModel)]="user" placeholder="User">
 <button (click)="addUser()">Add</button>
+<ul>
+    <li *ngFor="let user of userlist" (click)="selectUser(user);">
+        {{user}}
+    </li>
+</ul>
 <span>Current User : </span>{{userState.user}}
 <ul>
     <li *ngFor="let message of messages">
